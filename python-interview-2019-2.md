@@ -13,7 +13,9 @@
    答案：
 
    ```
-   
+   [(a, 1), (b, 2), (c, 3), (d, 4)]
+   {1: 'item1', 3: 'item9'}
+   6
    ```
 
 2. 下面的Python代码会输出什么。
@@ -28,7 +30,7 @@
    答案：
 
    ```
-   
+   42
    ```
 
 3. 有一个通过网络获取数据的Python函数（可能会因为网络或其他原因出现异常），写一个装饰器让这个函数在出现异常时可以重新执行，但尝试重新执行的次数不得超过指定的最大次数。
@@ -36,7 +38,17 @@
    答案：
 
    ```Python
-   
+   def foo(func):
+       m_count = 5
+       def wrapper(*args, **kwards):
+           try:
+               func(*args, **kwards)
+               return foo
+           except:
+               m_count += 1
+               if m_count <= 5:
+                   wrapper(*args, **kwards)
+       return func
    ```
 
 4. 下面的字典中保存了某些公司今日的股票代码及价格，用一句Python代码从中找出价格最高的股票对应的股票代码，用一句Python代码创建股票价格大于100的股票组成的新字典。
@@ -58,7 +70,8 @@
    答案：
 
    ```Python
-   
+   sorted(prices.items(), key=lambda x: x[1], reverse=True)[0][0]
+   {item[0]: item[1] for item in prices.items() if item[1] > 100}
    ```
 
 5. 用生成式实现矩阵的转置操作。例如，用`[[1, 2], [3, 4], [5, 6]`表示矩阵$\begin{bmatrix}1 & 2\\\\3 &4\\\\5 & 6\end{bmatrix}$，写一个生成式将其转换成`[[1, 3, 5], [2, 4, 6]]`即$\begin{bmatrix}1 & 3 & 5\\\\2 & 4 & 6\end{bmatrix}$。
