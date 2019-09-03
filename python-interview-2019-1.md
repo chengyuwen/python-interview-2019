@@ -13,7 +13,9 @@
    答案：
 
    ```
-   
+   [(a, 1), (b, 2), (c, 3), (d, 4)]
+   {1: 'item1', 3: 'item9'}
+   6
    ```
 
 2. 下面的Python代码会输出什么。
@@ -28,7 +30,7 @@
    答案：
 
    ```
-   
+   42
    ```
 
 3. 有一个通过网络获取数据的Python函数（可能会因为网络或其他原因出现异常），写一个装饰器让这个函数在出现异常时可以重新执行，但尝试重新执行的次数不得超过指定的最大次数。
@@ -36,7 +38,17 @@
    答案：
 
    ```Python
-   
+   def foo(func):
+       m_count = 5
+       def wrapper(*args, **kwards):
+           try:
+               func(*args, **kwards)
+               return foo
+           except:
+               m_count += 1
+               if m_count <= 5:
+                   wrapper(*args, **kwards)
+       return func
    ```
 
 4. 下面的字典中保存了某些公司今日的股票代码及价格，用一句Python代码从中找出价格最高的股票对应的股票代码，用一句Python代码创建股票价格大于100的股票组成的新字典。
@@ -58,7 +70,8 @@
    答案：
 
    ```Python
-   
+   sorted(prices.items(), key=lambda x: x[1], reverse=True)[0][0]
+   {item[0]: item[1] for item in prices.items() if item[1] > 100}
    ```
 
 5. 写一个函数，传入的参数是一个列表，如果列表中的三个元素`a`、`b`、`c`相加之和为`0`，就将这个三个元素组成一个三元组，最后该函数返回一个包含了所有这样的三元组的列表。例如：
@@ -70,7 +83,22 @@
    答案：
 
    ```Python
-   
+   def foo(list1):
+       result = []
+       a, b, c = 0, 1, 2
+       while a <= len(list1) - 3:
+           if list1[a] + list1[b] + list1[c] == 0:
+               result.append(tuple(sorted((list1[a], list1[b], list1[c]))))
+           c += 1
+           if c > len(list1) - 1:
+               b += 1
+               c = b + 1
+           if b > len(list1) - 2:
+               a += 1
+               b = a + 1
+               c = b + 1
+       return list(set(result)) 
+
    ```
 
 6. 写一个函数，传入的参数是一个列表（列表中的元素可能也是一个列表），返回该列表最大的嵌套深度，例如：
