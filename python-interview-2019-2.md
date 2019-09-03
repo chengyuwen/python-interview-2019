@@ -79,7 +79,7 @@
    答案：
 
    ```Python
-   
+   [[item[x] for item in items] for x in range(len(items[0]))]
    ```
 
 6. 写一个函数，传入的参数是一个列表（列表中的元素可能也是一个列表），返回该列表最大的嵌套深度，例如：
@@ -95,7 +95,12 @@
    答案：
 
    ```Python
-   
+   def foo(list1):
+       a = 1
+       for item in list1:
+           if isinstance(item, list):
+               a += 1
+               list1 = item
    ```
 
 7. 写一个函数，实现将输入的长链接转换成短链接，每个长链接对应的短链接必须是独一无二的且每个长链接只应该对应到一个短链接，假设短链接统一以`http://t.cn/`开头。
